@@ -1,1 +1,1 @@
-web: gunicorn dailyfinancenews.wsgi
+web: gunicorn dailyfinancepulse.wsgi
