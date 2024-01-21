@@ -1,0 +1,85 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+}
+
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background: #333;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+h2,
+h3 {
+  margin: 0 0 15px 0;
+}
+
+a {
+  color: #333;
+}
+
+.post-title {
+  margin: 0;
+}
+
+.post-subtitle {
+  color: #666;
+  font-style: italic;
+}
+
+.full-width-image {
+  width: 100%;
+  height: auto;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.pagination {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.pagination li {
+  display: inline;
+  margin: 5px;
+}
+
+.pagination a {
+  text-decoration: none;
+  padding: 5px 10px;
+  background: #f4f4f4;
+  color: #333;
+}
+
+.pagination a:hover {
+  background: #333;
+  color: #fff;
+}
