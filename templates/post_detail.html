@@ -1,5 +1,90 @@
-{% extends 'base.html' %} {% block title %}{{ post.title }}{% endblock %} {%
-block content %}
-<h2>{{ post.title }}</h2>
-<p>{{ post.content }}</p>
-{% endblock %}
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Masthead section displaying post title and information -->
+<div class="masthead">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-md-6 masthead-text">
+                <!-- Displaying the post title -->
+                <h1 class="post-title">{{ post.title }}</h1>
+                <!-- Displaying the post author and creation date -->
+                <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
+            </div>
+            <!-- Displaying the post's featured image -->
+            <div class="d-none d-md-block col-md-6 masthead-image">
+                {% if "placeholder" in post.featured_image.url %}
+                <!-- Placeholder image if no featured image is available -->
+                <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%">
+                {% else %}
+                <!-- Featured image of the post -->
+                <img src="{{ post.featured_image.url }}" width="100%">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main content container -->
+<div class="container">
+    <div class="row">
+        <!-- Blog post content area -->
+        <div class="col card mb-4 mt-3 left top">
+            <div class="card-body">
+                <!-- Displaying the main content of the post -->
+                <p class="card-text">
+                    {{ post.content | safe }}
+                </p>
+                <!-- Likes and comments counters -->
+                <div class="row">
+                    <div class="col-1">
+                        <!-- Displaying the number of likes -->
+                        <strong class="text-secondary"><i class="far fa-heart"></i> {{ post.number_of_likes }}</strong>
+                    </div>
+                    <div class="col-1">
+                        {% with comments.count as total_comments %}
+                        <!-- Displaying the total number of comments -->
+                        <strong class="text-secondary"><i class="far fa-comments"></i> {{ total_comments }}</strong>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="row">
+        <div class="col">
+            <hr>
+        </div>
+    </div>
+
+    <!-- Comments section -->
+    <div class="row">
+        <div class="col-md-8 card mb-4 mt-3">
+            <h3>Comments:</h3>
+            <div class="card-body">
+                <!-- Loop through each comment -->
+                {% for comment in comments %}
+                <div class="comments" style="padding: 10px;">
+                    <!-- Displaying commenter's name and comment date -->
+                    <p class="font-weight-bold">
+                        {{ comment.name }}
+                        <span class="text-muted font-weight-normal">{{ comment.created_on }}</span> wrote:
+                    </p>
+                    <!-- Displaying the comment body -->
+                    {{ comment.body | linebreaks }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Placeholder for future content -->
+        <div class="col-md-4 card mb-4 mt-3 ">
+            <div class="card-body">
+                <!-- Content to be added later -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
