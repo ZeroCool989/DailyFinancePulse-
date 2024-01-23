@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+    <!-- Container to center the content vertically and horizontally -->
+    <div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+        <!-- Content container with white background, padding, and rounded corners -->
+        <div class="col-md-4 bg-white p-4 rounded shadow">
+            <!-- Sign Up form title -->
+            <h2 class="text-center mb-4">Sign Up</h2>
+            <form>
+                <!-- Username input field -->
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Username">
+                </div>
+                <!-- Email input field (optional) -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email (optional)</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email address">
+                </div>
+                <!-- Password input field -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <small class="form-text text-muted">Your password can’t be too similar to your other personal information.</small>
+                    <small class="form-text text-muted">Your password must contain at least 8 characters.</small>
+                    <small class="form-text text-muted">Your password can’t be a commonly used password.</small>
+                    <small class="form-text text-muted">Your password can’t be entirely numeric.</small>
+                </div>
+                <!-- Password confirmation input field -->
+                <div class="mb-3">
+                    <label for="password_confirm" class="form-label">Password (again)</label>
+                    <input type="password" class="form-control" id="password_confirm" placeholder="Password (again)">
+                </div>
+                <!-- Sign Up button within a grid for proper styling -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <style>
+        /* Custom CSS for styling the content */
+        .col-md-4 {
+            max-width: 400px; 
+            margin: 0 auto; 
+        }
+    </style>
+{% endblock %}

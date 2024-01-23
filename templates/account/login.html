@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <!-- Container to center the form vertically and horizontally -->
+    <div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+        <!-- Form container with white background, padding, and rounded corners -->
+        <div class="col-md-4 bg-white p-4 rounded shadow">
+            <!-- Login form title -->
+            <h2 class="text-center mb-4">Login</h2>
+            <form>
+                <!-- Username input field -->
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                </div>
+                <!-- Password input field -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                </div>
+                <!-- Login button within a grid for proper styling -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <style>
+        /* Custom CSS to style the login form */
+        .col-md-4 {
+            max-width: 400px; 
+            margin: 0 auto; 
+        }
+    </style>
+{% endblock %}
