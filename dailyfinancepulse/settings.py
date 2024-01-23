@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'financenews',
 ]
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
@@ -110,7 +112,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
 }
 
-CRISPY_TEMPLATE_PACK = 'bootstrap5' 
+CRISPY_TEMPLATE_PACK = 'bootstrap4' 
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
