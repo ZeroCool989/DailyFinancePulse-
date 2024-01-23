@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% load crispy_forms_tags %}
+
 <!-- Masthead section displaying post title and information -->
 <div class="masthead">
     <div class="container">
@@ -81,7 +83,23 @@
         <!-- Placeholder for future content -->
         <div class="col-md-4 card mb-4 mt-3 ">
             <div class="card-body">
-                <!-- Content to be added later -->
+              {% if user.is_authenticated %}
+
+              <!-- Comment form for authenticated users -->
+              <h3>Leave a comment:</h3>
+              <p>Posting as: {{ user.username }}</p>
+              <form method="post" style="margin-top: 1.3em;">
+                {% csrf_token %}
+                <!-- Comment text area -->
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+              {% endif %}
             </div>
         </div>
     </div>

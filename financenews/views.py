@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Post
+from .forms import CommentForm
 
 # Class-based view to handle the listing of blog posts
 class PostList(generic.ListView):
@@ -31,6 +32,7 @@ class PostDetail(View):
                 "post": post,
                 "comment": comment,
                 "liked":liked,
+                "comment_form": CommentForm()
                 }
             )
         # Renders the post detail template with the post object
