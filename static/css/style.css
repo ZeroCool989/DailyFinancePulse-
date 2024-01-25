@@ -1,7 +1,15 @@
 /* General Body and Background Styles */
-body {
-  background-color: #F9FAFC;
+body, html {
+  height: 100%;
+  margin: 0;
 }
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Ensures that this element takes up all available space */
+}
+
 
 /* Branding and Logo Styles */
 .brand {
@@ -189,3 +197,21 @@ body {
 .fa-brands {
   font-size: 24px;
 }
+
+.login-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.login-page-container .row {
+  flex-grow: 1;
+}
+
+/* Optional: If you want to limit the height of the card so that it does not grow too large on bigger screens */
+@media (min-height: 800px) {
+  .login-page-container .row {
+      max-height: 600px;
+  }
+}
+
