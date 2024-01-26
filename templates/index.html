@@ -16,7 +16,7 @@
                             <!-- Image container for the blog post -->
                             <div class="image-container">
                                 <!-- Display the featured image of the post -->
-                                <img class="card-img-top fixed-image-height" src="{{ post.featured_image.url }}">
+                                <img class="card-img-top fixed-image-height" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
                                 <!-- Overlay with author information -->
                                 <div class="image-flash">
                                     <p class="author">Author: {{ post.author }}</p>
