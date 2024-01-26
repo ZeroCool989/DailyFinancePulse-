@@ -28,9 +28,12 @@
                                 <p class="card-text">{{ post.excerpt }}</p>
                             </a>
                             <hr />
-                            <!-- Post metadata (date and likes) -->
-                            <p class="card-text text-muted h6">{{ post.created_on}} <i class="far fa-heart"></i>
-                                {{ post.number_of_likes }}</p>
+                            <!-- Post metadata (date, likes, and comments) -->
+                            <p class="card-text text-muted h6">
+                                {{ post.created_on }} <i class="far fa-heart"></i> {{ post.number_of_likes }}
+                                <br>
+                                <i class="far fa-comments"></i> {{ post.number_of_comments }} comments
+                            </p>
                         </div>
                     </div>
                 </div>

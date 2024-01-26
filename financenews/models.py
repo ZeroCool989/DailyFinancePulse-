@@ -46,6 +46,11 @@ class Post(models.Model):
     def __str__(self):
         # Returns the title when the model instance is converted to a string
         return self.title
+    
+    # Method to count the number of approved comments for the post
+    def number_of_comments(self):
+        #Returns the number of approved comments for this post.
+        return self.comments.filter(approved=True).count()
 
     def number_of_likes(self):
         # Counts and returns the number of likes for the post
