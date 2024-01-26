@@ -1,7 +1,7 @@
 # Import necessary modules and classes
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from .models import Post
 from .forms import CommentForm
 
@@ -83,14 +83,21 @@ class PostDetail(View):
 # Define a view to handle liking and unliking a blog post
 class PostLike(View):
     def post(self, request, slug, *args, **kwargs):
-        # Retrieve the post using the provided slug
+        # Retrieve the post based on the given slug. If not found, return a 404 error.
         post = get_object_or_404(Post, slug=slug)
+
+        # Initialize the 'liked' flag as False.
+        liked = False
 
         # Check if the current user has already liked the post.
         if post.likes.filter(id=request.user.id).exists():
-            post.likes.remove(request.user)  # Remove the user from the post's likes
+            # If yes, remove the user from the post's 'likes' and set 'liked' as False.
+            post.likes.remove(request.user)
         else:
-            post.likes.add(request.user)  # Add the user to the post's likes
+            # If not, add the user to the post's 'likes' and set 'liked' as True.
+            post.likes.add(request.user)
+            liked = True
 
-        # Redirect the user back to the post detail page after the action.
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        # Return a JSON response with the 'liked' status and the updated like count.
+        # This allows the client-side script to update the UI without reloading the page.
+        return JsonResponse({"liked": liked, "likes_count": post.likes.count()})
