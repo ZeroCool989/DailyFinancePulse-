@@ -15,56 +15,66 @@ class PostList(generic.ListView):
     paginate_by = 6  # Limits the number of posts per page to 6 for pagination purposes.
 
 class PostDetail(View):
-    """
-    A view that extends Django's View class to handle the display and interaction with a single blog post.
-    It deals with both GET and POST requests to show post details and handle comment submissions, respectively.
-    """
     def get(self, request, slug, *args, **kwargs):
         """
-        Handles GET requests. It is triggered when a user requests to view the details of a specific post.
+        Retrieves and displays a single blog post along with its comments when a GET request is made.
         """
-        post = get_object_or_404(Post, slug=slug, status=1)  # Retrieves the specific post using the slug, only if it's published (status=1). Otherwise, it raises a 404 error.
-        comments = post.comments.filter(approved=True).order_by('-created_on')  # Fetches all approved comments for this post, sorted by creation date in descending order.
-        liked = post.likes.filter(id=request.user.id).exists()  # Checks if the current user has already liked this post, returning True or False.
+        # Fetch the post based on the given slug; return 404 if not found or not published.
+        post = get_object_or_404(Post, slug=slug, status=1)
 
-        # Renders the post detail page with the post data, comments, and a blank comment form.
+        # Retrieve all approved comments for the post, sorted from newest to oldest.
+        comments = post.comments.filter(approved=True).order_by('-created_on')
+
+        # Check if the current logged-in user has liked this post.
+        liked = post.likes.filter(id=request.user.id).exists()
+
+        # Render the post detail template, passing the post, its comments, and a new comment form.
         return render(request, "post_detail.html", {
             "post": post,
             "comments": comments,
-            "commented": False,  # Indicates that the user has not commented yet (used for UI purposes).
+            "commented": False,
             "liked": liked,
-            "comment_form": CommentForm()  # Provides an empty form for submitting a new comment.
+            "comment_form": CommentForm()  # Empty form for new comment submission
         })
 
     def post(self, request, slug, *args, **kwargs):
         """
-        Handles POST requests, which occur when a user submits a comment.
+        Processes the submission of a new comment when a POST request is made.
         """
-        post = get_object_or_404(Post, slug=slug, status=1)  # Retrieves the post in the same way as the GET method.
-        comments = post.comments.filter(approved=True).order_by('-created_on')  # Fetches comments to be included in case the form submission fails and the page needs to be re-rendered.
-        liked = post.likes.filter(id=request.user.id).exists()  # Check if the user liked the post, similar to the GET method.
+        # Fetch the post; return 404 if not found or not published.
+        post = get_object_or_404(Post, slug=slug, status=1)
 
-        comment_form = CommentForm(data=request.POST)  # Initializes the comment form with data submitted by the user.
+        # Pre-fetch comments for the post in case re-rendering is needed due to form errors.
+        comments = post.comments.filter(approved=True).order_by('-created_on')
 
+        # Determine if the current user has liked the post.
+        liked = post.likes.filter(id=request.user.id).exists()
+
+        # Create a comment form instance with the submitted POST data.
+        comment_form = CommentForm(data=request.POST)
+
+        # Check if the submitted form is valid.
         if comment_form.is_valid():
-            # If the form passes validation:
-            new_comment = comment_form.save(commit=False)  # Temporarily saves the new comment object without committing to the database.
-            new_comment.post = post  # Assigns the current post to the comment.
-            new_comment.email = request.user.email  # Sets the commenter's email from the user's data.
-            new_comment.name = request.user.username  # Sets the commenter's username.
-            new_comment.save()  # Finally commits the comment to the database.
+            # Create a new comment object from the form but don't save it to the database yet.
+            new_comment = comment_form.save(commit=False)
+            # Link the comment to the current post and user details.
+            new_comment.post = post
+            new_comment.email = request.user.email
+            new_comment.name = request.user.username
+            # Save the new comment to the database.
+            new_comment.save()
+            # Redirect to the post detail page, showing the newly added comment.
+            return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        else:
+            # If the form is not valid, render the post detail page again with form errors.
+            return render(request, "post_detail.html", {
+                "post": post,
+                "comments": comments,
+                "commented": False,
+                "liked": liked,
+                "comment_form": comment_form  # Form with validation errors
+            })
 
-            # Re-fetches comments including the new one for immediate display.
-            comments = post.comments.filter(approved=True).order_by('-created_on')
-
-        # Re-renders the same post detail page with all comments and resets the comment form.
-        return render(request, "post_detail.html", {
-            "post": post,
-            "comments": comments,
-            "commented": True,  # Indicates that the user has now commented.
-            "liked": liked,
-            "comment_form": CommentForm()  # Resets the form to be empty after submission.
-        })
         
 class PostLike(View):
     """
