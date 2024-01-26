@@ -7,21 +7,20 @@ body, html {
 .main-content {
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Ensures that this element takes up all available space */
+  flex-grow: 1;
 }
-
 
 /* Branding and Logo Styles */
 .brand {
   font-family: Lato, sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #4A4A4F;
+  color: #E5E4E2; /* Platinum */
 }
 
 /* Accent Color Styles */
 .red-o {
-  color: #E84610;
+  color: #98C379; /* Muted Lime Green */
 }
 
 /* Typography Weight Styles */
@@ -31,16 +30,16 @@ body, html {
 
 /* Light and Dark Background Styles */
 .light-bg {
-  background-color: #fff;
+  background-color: #F5F5F5; /* Soft White */
 }
 
 .dark-bg {
-  background-color: #445261;
+  background-color: #191970; /* Midnight Blue */
   padding: 30px 0;
 }
 
 .main-bg {
-  background-color: #F9FAFC;
+  background-color: #D3E5F5; /* Pale Blue */
 }
 
 /* Card Component Styles */
@@ -66,12 +65,12 @@ body, html {
   bottom: 5%;
   min-width: 30%;
   left: -2px;
-  background-color: #23BBBB;
+  background-color: #98C379; /* Muted Lime Green */
 }
 
 /* Author Name Styles */
 .author {
-  color: white;
+  color: #E5E4E2; /* Platinum */
   margin: 4px;
   text-transform: uppercase;
 }
@@ -87,8 +86,8 @@ body, html {
 }
 
 .masthead-text {
-  background-color: #445261;
-  color: white;
+  background-color: #191970; /* Midnight Blue */
+  color: #E5E4E2; /* Platinum */
 }
 
 .masthead-image {
@@ -103,7 +102,7 @@ body, html {
   right: 90%;
   height: 100%;
   width: 150%;
-  background: #445261;
+  background: #191970; /* Midnight Blue */
   -webkit-transform: skew(15deg);
   -moz-transform: skew(15deg);
   transform: skew(15deg);
@@ -113,12 +112,12 @@ body, html {
 /* Post Link Styles */
 .post-link {
   text-decoration: none;
-  color: #445261;
+  color: #333333; /* Charcoal Gray */
 }
 
 .post-link:hover,
 .page-link {
-  color: #39FF14;
+  color: #98C379; /* Muted Lime Green */
 }
 
 /* Post Title and Subtitle Styles */
@@ -129,48 +128,48 @@ body, html {
 
 .post-subtitle {
   margin-left: 5%;
-  color: lightgray;
+  color: #E5E4E2; /* Platinum */
 }
 
 /* Button Styles */
 .btn-signup {
-  background-color: #23BBBB;
-  color: #fff;
+  background-color: #98C379; /* Muted Lime Green */
+  color: #FFF;
 }
 
 .btn-signup:hover,
 .btn-signup:active {
-  background-color: #fff;
-  color: #23BBBB;
+  background-color: #F5F5F5; /* Soft White */
+  color: #98C379; /* Muted Lime Green */
 }
 
 .link {
-  color: #23BBBB;
+  color: #98C379; /* Muted Lime Green */
   text-decoration: none;
 }
 
 .link:hover,
 .link:active {
-  color: #445261;
+  color: #333333; /* Charcoal Gray */
   text-decoration: underline;
 }
 
 .btn-like {
-  color: #E84610;
+  color: #e84610; /* Red-Orange */
   border: none;
   background: transparent;
 }
 
 .btn-like:hover,
 .btn-like:active {
-  color: #E84610;
+  color: #e84610; /* Red-Orange */
   background: transparent;
 }
 
 /* Footer Styles */
 #social-networks {
-  background-color: #333;
-  color: #fff;
+  background-color: #191970; /* Midnight Blue */
+  color: #E5E4E2; /* Platinum */
   padding: 20px 0;
   text-align: center;
 }
@@ -182,7 +181,7 @@ body, html {
 }
 
 #social-networks h2 {
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
 }
 
 .social-networks {
@@ -208,10 +207,40 @@ body, html {
   flex-grow: 1;
 }
 
-/* Optional: If you want to limit the height of the card so that it does not grow too large on bigger screens */
-@media (min-height: 800px) {
-  .login-page-container .row {
-      max-height: 600px;
-  }
+
+/* Comment Section Styles */
+.comment-section {
+  margin-top: 20px;
 }
 
+.comment-item {
+  background-color: #fff; /* White background for comments */
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow for depth */
+}
+
+.comment-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.comment-body {
+  font-size: 0.9rem;
+}
+
+/* Comment Form Styles */
+.comment-form {
+  padding: 15px;
+  background-color: #f8f9fa; /* Slightly different background for form */
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .comment-item, .comment-form {
+      padding: 10px;
+  }
+}

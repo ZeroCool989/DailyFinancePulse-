@@ -7,23 +7,32 @@
     <meta charset="UTF-8">
     <title>DailyFinancePulse!</title>
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon from Cloudinary -->
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/drqluthko/image/upload/v1706178341/hgx0rbz0grnlf8nbeyls.png">
 
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- FontAwesome Kit -->
     <script src="https://kit.fontawesome.com/4912cd7289.js" crossorigin="anonymous"></script>
 </head>
+
 
 <body class="d-flex flex-column h-100 main-bg">
 
@@ -89,7 +98,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h2 class="mb-4">Designed by</h2>
+                    <h2 class="mb-4">Website created by</h2>
                     <a href="https://zerocool989.github.io/porfolio-project-1/" target="_blank" class="text-white">
                         Almir Dumisic - Full Stack Developer, Code Institute Student
                     </a>
@@ -117,6 +126,16 @@
             </div>
         </div>
     </footer>
-
+    <!-- Script to Auto-Close Alert Messages After 3 Seconds -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() { 
+            let alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    new bootstrap.Alert(alert).close();
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 </html>

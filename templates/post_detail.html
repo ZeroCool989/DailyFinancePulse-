@@ -31,7 +31,7 @@
 <div class="container">
     <div class="row">
         <!-- Blog post content area -->
-        <div class="col card mb-4 mt-3 left top">
+        <div class="col-lg-8 col-md-10 card mb-4 mt-3 mx-auto">
             <div class="card-body">
                 <!-- Displaying the main content of the post -->
                 <p class="card-text">
@@ -67,51 +67,58 @@
 </div>
 
 <!-- Divider -->
-<div class="row">
-    <div class="col">
-        <hr>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <hr>
+        </div>
     </div>
 </div>
 
-<!-- Comments section -->
-<div class="row">
-    <div class="col-md-8 card mb-4 mt-3">
-        <h3>Comments:</h3>
-        <div class="card-body">
-            <!-- Loop through each comment -->
-            {% for comment in comments %}
-            <div class="comments" style="padding: 10px;">
-                <!-- Displaying commenter's name and comment date -->
-                <p class="font-weight-bold">
-                    {{ comment.name }}
-                    <span class="text-muted font-weight-normal">{{ comment.created_on }}</span> wrote:
-                </p>
-                <!-- Displaying the comment body -->
-                {{ comment.body | linebreaks }}
+<!-- Comments Section -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 card mb-4 mt-3 mx-auto">
+            <h3>Comments:</h3>
+            <div class="card-body">
+                <!-- Loop through each comment -->
+                {% for comment in comments %}
+                <div class="comment-item" style="padding: 10px;">
+                    <!-- Displaying commenter's name and comment date -->
+                    <p class="comment-header">
+                        {{ comment.name }}
+                        <span class="text-muted">{{ comment.created_on }}</span> wrote:
+                    </p>
+                    <!-- Displaying the comment body -->
+                    <div class="comment-body">
+                        {{ comment.body | linebreaks }}
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+        </div>
+        <!-- Comment Form Area -->
+        <div class="col-lg-4 col-md-6 card mb-4 mt-3">
+            <div class="card-body">
+                {% if commented %}
+                <div class="alert alert-success" role="alert">
+                    Your comment is awaiting approval
+                </div>
+                {% else %}
+                {% if user.is_authenticated %}
+                <h3>Leave a comment:</h3>
+                <p>Posting as: {{ user.username }}</p>
+                <form method="post" class="comment-form">
+                    {{ comment_form | crispy }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 10px;">Submit</button>
+                </form>
+                {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
-    <!-- Placeholder for future content -->
-    <div class="col-md-4 card mb-4  mt-3 ">
-      <div class="card-body">
-          <!-- For later -->
-          {% if commented %}
-          <div class="alert alert-success" role="alert">
-              Your comment is awaiting approval
-          </div>
-          {% else %}
-          {% if user.is_authenticated %}
-          <h3>Leave a comment:</h3>
-          <p>Posting as: {{ user.username }}</p>
-          <form method="post" style="margin-top: 1.3em;">
-              {{ comment_form | crispy }}
-              {% csrf_token %}
-              <button type="submit" class="btn btn-signup btn-lg">Submit</button>
-          </form>
-          {% endif %}
-          {% endif %}
-      </div>
-    </div>
 </div>
+
 {% endblock content %}
+
